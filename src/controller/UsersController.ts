@@ -1,23 +1,17 @@
 import { Request, Response } from "express";
-import { SettingsService } from '../services/SettingsService';
+import { UsersService } from "../services/UsersService";
 
-class SettingsController {
+class UsersController {
 
   
-  async create(request: Request, response: Response) {
-    const { chat, username } = request.body
-    const settingsService = new SettingsService()
-    
-    try {
-      const settings = await settingsService.create({ chat, username })
-    
-      return response.json(settings);
-    } catch (error) {
-      return response.status(400).json({
-        message: error.message
-      })
-    }
+  async create(request: Request, response: Response): Promise<Response> {
+    const usersService = new UsersService();
+    const { email } = request.body;
+
+    const user = await usersService.create(email);
+
+    return response.json(user);
   }
 }
 
-export { SettingsController }
+export { UsersController  }

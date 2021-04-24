@@ -13,7 +13,7 @@ class SettingsService {
     const userAlreadyExists = await settingsRepository.findOne({ username })
 
     if(userAlreadyExists) {
-      throw new Error("User already exists!")
+      throw new Error("Settings already exists!")
     }
     
     const settings = settingsRepository.create({
